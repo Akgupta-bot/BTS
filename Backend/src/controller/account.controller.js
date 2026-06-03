@@ -18,4 +18,22 @@
         })
 
     }
-    module.exports={createAccountController,getUserAccountsController}
+    async function getAccountBalanceController(req,res){
+        const {accountId}=req.params;
+        const account =await accountModel.findOne({
+             _id:accountId,
+             userId:req.user._id
+        })
+        if(!account){
+            return res.status(404).json({
+                message:'Account not found'
+            })
+        }
+        const balance = await account.getBalance();
+
+    return res.status(200).json({
+        accountId,
+        balance
+    });
+    }
+    module.exports={createAccountController,getUserAccountsController,getAccountBalanceController}

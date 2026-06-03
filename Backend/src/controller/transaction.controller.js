@@ -1,7 +1,7 @@
 const transactionModel=require("../models/transaction.model")
 const ledgerModel=require("../models/ledger.model")
 const accountModel=require("../models/account.model")
-const emailService=require("../services/email.services")
+const emailServices=require("../services/email.services")
 const mongoose=require("mongoose")
 
 
@@ -28,7 +28,7 @@ async function createTransaction(req,res){
      * 2.Validate idempotency Key
      */
     const isTransactionAlreadyExists =await transactionModel.findOne({
-        idempotencyKey:idempotencykey
+        idempotencyKey:idempotencyKey
     })
     if(isTransactionAlreadyExists){
         if(isTransactionAlreadyExists.status==="COMPLETED"){
@@ -76,30 +76,28 @@ async function createTransaction(req,res){
     const session = await mongoose.startSession()
     session.startTransaction()
 
-    const transaction =await transactionModel.create({
+    const transaction =new transactionModel({
         fromAccount,
         toAccount,
         amount,
         idempotencyKey,
-        status:"pending"
-    },{
-        session
+        status:"PENDING"
     })
-    const debitLedgerEntry = await ledgerModel.create({
+    const debitLedgerEntry = await ledgerModel.create([{
         account :fromAccount,
         amount:amount,
         transaction:transaction._id,
         type:"DEBIT"
-    },{
+    }],{
         session
     
     })
-     const creditLedgerEntry = await ledgerModel.create({
+     const creditLedgerEntry = await ledgerModel.create([{
         account :toAccount,
         amount:amount,
         transaction:transaction._id,
         type:"CREDIT"
-    },{
+    }],{
         session
     
     })
@@ -155,7 +153,7 @@ async function createInitialFundsTransaction(req,res){
         toAccount,
         amount,
         idempotencyKey,
-        status:"pending"
+        status:"PENDING"
     })
     const debitLedgerEntry = await ledgerModel.create([{
         account :fromUserAccount._id,
