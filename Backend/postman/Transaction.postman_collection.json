@@ -1,0 +1,74 @@
+{
+  "info": {
+    "_postman_id": "75e78df2-037e-4dba-9b3d-78d6c31a2b2b",
+    "name": "Transaction",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47785072"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"toAccount\":\"6a1fefb6844359a9df53f65f\",\r\n    \"amount\":10000,\r\n    \"idempotencyKey\":\"e49beca5-110c-405b-9301-7e37712cbb8c\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/transaction/system/initial-funds",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "transaction",
+            "system",
+            "initial-funds"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "transaction",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fromAccount\":\"6a1fefb6844359a9df53f65f\",\r\n    \"toAccount\":\"6a2039fad54829f08ef1542e\",\r\n    \"amount\":2000,\r\n    \"idempotencyKey\":\"ac1c922f-edfd-4ab4-8565-ca249f50e4ad\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/transaction",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "transaction"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
