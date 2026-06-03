@@ -540,20 +540,85 @@ Send Email Notification
 
 # 📬 Postman Collections
 
-Import the provided collections:
+The project includes Postman collections for testing all APIs.
 
-* Authentication Collection
-* Accounts Collection
-* Transaction Collection
+## Available Collections
 
-Steps:
+### Authentication Collection
+
+Location:
 
 ```text
-Postman
-  → Import
-  → Upload Collection JSON
-  → Run Requests
+Postman/authentication.postman_collection.json
 ```
+
+Contains:
+
+* Register User
+* Login User
+* Logout User
+
+---
+
+### Accounts Collection
+
+Location:
+
+```text
+Postman/accounts.postman_collection.json
+```
+
+Contains:
+
+* Create Account
+* Get User Accounts
+* Get Account Balance
+
+---
+
+### Transaction Collection
+
+Location:
+
+```text
+Postman/transaction.postman_collection.json
+```
+
+Contains:
+
+* Money Transfer
+* Initial Fund Transfer
+
+---
+
+## How to Import
+
+1. Open Postman
+2. Click **Import**
+3. Select the desired collection JSON file
+4. Click **Import**
+5. Start testing APIs
+
+---
+
+## Recommended Testing Flow
+
+```text
+Register User
+     ↓
+Login User
+     ↓
+Create Account
+     ↓
+Initial Fund Transfer
+     ↓
+Check Balance
+     ↓
+Transfer Money
+     ↓
+Verify Balance
+```
+
 
 ---
 
